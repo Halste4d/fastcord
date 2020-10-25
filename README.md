@@ -5,4 +5,4 @@ The use of this application is simple, after having cloned / downloaded this rep
 
 Remember: after creating the bot folder, access it from the terminal and run the npm init -y and npm i commands to install the dependencies.
 
-Special thanks to TedBrincadeira. For offering ideas and support.
+Special thanks to (TedBrincadeira)[https://github.com/TedBrincadeira]. For offering ideas and support.
