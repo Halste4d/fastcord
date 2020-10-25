@@ -1,0 +1,10 @@
+{
+  "index.js": {
+    "path": "/",
+    "code": "require('dotenv').config()\nconst Discord = require('discord.js')\nconst client = new Discord.Client()\n\nclient.on('ready', () => {\n console.log('Client online.')\n})\n\nclient.login(process.env.TOKEN)"
+  },
+  ".env": {
+    "path": "/",
+    "code": ""
+  }
+}
