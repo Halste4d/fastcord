@@ -15,21 +15,21 @@ const Bot = () => {
 function createSourceBot(botName) {
     const root = `${botName}-bot`
 
-    fs.mkdir(`${root}`, { recursive: true }, (err) => {
+    fs.mkdir(root, { recursive: true }, (err) => {
         if (err) throw err;
     });
 
     for(file in files) {
-        fs.mkdir(`${root}${files[file].path}`, { recursive: true }, (err) => { 
+        fs.mkdir(root + files[file].path, { recursive: true }, (err) => { 
             if (err) throw err;
         });
 
-        fs.writeFile(`${root}${files[file].path}${file}`, `${files[file].code}`, (err) => {
+        fs.writeFile(root + files[file].path + file, files[file].code, (err) => {
             if (err) throw err;
         });
     }
     
-    console.log(chalk.green(`The bot ${botName} was created.`))
+    console.log(chalk.green('The bot ' + botName + ' was created.'))
 }
 
 Bot()
