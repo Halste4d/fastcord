@@ -21,7 +21,6 @@
   "homepage": "https://github.com/Halste4d/fastcord#readme",
   "dependencies": {
     "chalk": "^4.1.0",
-    "fs": "0.0.1-security",
     "prompt": "^1.0.0",
     "prompt-sync": "^4.2.0"
   }
