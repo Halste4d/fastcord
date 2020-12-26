@@ -13,7 +13,7 @@ const Bot = () => {
 }
 
 function createSourceBot(botName) {
-    const root = `${botName}-bot`
+    const root = botName + '-bot'
 
     fs.mkdir(root, { recursive: true }, (err) => {
         if (err) throw err;
