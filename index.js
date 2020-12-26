@@ -4,15 +4,11 @@ const fs = require('fs');
 const chalk = require('chalk')
 
 const Bot = () => {
-    const botName = prompt(chalk.magenta('[Name] Bot name: '));
-    let botPrefix = prompt(chalk.magenta('[Prefix] Bot prefix: '));
-    const botToken = prompt(chalk.magenta('[Token] Bot token: '));
+    const botName = prompt(chalk.magenta('[Name] Bot name: ')) || 'Untitled';
+    let botPrefix = prompt(chalk.magenta('[Prefix] Bot prefix: ')) || '!';
+    const botToken = prompt(chalk.magenta('[Token] Bot token: ')) || 'NoToken';
     files['.env'].code = `TOKEN=${botToken}\nPREFIX=${botPrefix}`;
-
-    if(!botPrefix) botPrefix = '!'
-    if(!botName) return console.log(chalk.red('[ERR] Please, inform your bot name.'));
-    if(!botToken) return console.log(chalk.red('[ERR] Please, inform TOKEN correctly.'));
-
+    
     createSourceBot(botName)
 }
 
