@@ -1,7 +1,10 @@
 {
   "index.js": {
     "path": "/",
-    "code": "require('dotenv').config()\nconst Discord = require('discord.js')\nconst client = new Discord.Client()\n\nclient.on('ready', () => {\n console.log('Client online.')\n})\n\nclient.login(process.env.TOKEN)"
+    "code": {
+      "discord.js": "require('dotenv').config()\nconst Discord = require('discord.js')\nconst client = new Discord.Client()\n\nclient.on('ready', () => {\n console.log('Client online.')\n})\n\nclient.login(process.env.TOKEN)",
+      "eris": "require('dotenv').config()\nconst Discord = require('eris')\nconst client = new Discord.Client(process.env.TOKEN)\n\nclient.on('ready', () => {\n console.log('Client online.')\n})\n\nclient.connect()"
+    }
   },
   ".env": {
     "path": "/",
