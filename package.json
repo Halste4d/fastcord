@@ -1,6 +1,6 @@
 {
   "name": "fastcord",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "FastCord is a Nodejs CLI application that aims to make the creation of bot for Discord more practical.",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,8 @@
     "url": "git+https://github.com/Halste4d/fastcord.git"
   },
   "keywords": [
-    "discordjs"
+    "discordjs",
+    "eris"
   ],
   "author": "Halste4d",
   "license": "ISC",
@@ -21,7 +22,6 @@
   "homepage": "https://github.com/Halste4d/fastcord#readme",
   "dependencies": {
     "chalk": "^4.1.0",
-    "prompt": "^1.0.0",
     "prompt-sync": "^4.2.0"
   }
 }
