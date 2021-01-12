@@ -1,46 +1,56 @@
-const prompt = require('prompt-sync')();
-const files = require('./utils/sourceCode.json');
-const fs = require('fs');
-const chalk = require('chalk');
-const child_process = require('child_process');
+const { prompt } = require('inquirer');
+const { mkdir, writeFile } = require('fs');
+const { join } = require('path');
+const { exec } = require('child_process');
+const source = require('./utils/source.json');
 
-const Bot = () => {
-    const botName = prompt(chalk.magenta('[Name] Bot name: ')) || 'Untitled';
-    const botPrefix = prompt(chalk.magenta('[Prefix] Bot prefix: ')) || '!';
-    const botToken = prompt(chalk.magenta('[Token] Bot token: '));
+prompt([
+    {
+        type: 'input',
+        name: 'name',
+        message: 'Bot name:'
+    },
 
-    if (!botToken) throw new Error('Invalid bot token!');
+    {
+        type: 'input',
+        name: 'prefix',
+        message: 'Bot prefix:'
+    },
 
-    const botLibrary = prompt(chalk.magenta('[Library] Bot library[discord.js, eris]: ')) || 'discord.js';
+    {
+        type: 'password',
+        name: 'token',
+        message: 'Bot token:'
+    },
 
-    if (!['eris', 'discord.js'].includes(botLibrary)) throw new Error('Invalid bot library!');
+    {
+        type: 'list',
+        name: 'library',
+        message: 'Bot library:',
+        choices: [
+            'discord.js',
+            'eris'
+        ]
+    }
+]).then(({ name, prefix, token, library }) => {
+    const root = name.toLowerCase();
 
-    files['.env'].code = `TOKEN=${botToken}\nPREFIX=${botPrefix}`;
-
-    createSourceBot(botName, botLibrary)
-}
-
-function createSourceBot(botName, botLibrary) {
-    const root = botName + '-bot'
-
-    fs.mkdir(root, { recursive: true }, (err) => {
+    mkdir(root, { recursive: true }, err => {
         if (err) throw err;
     });
 
-    fs.writeFile(root + files['.env'].path + '.env', files['.env'].code, { recursive: true }, (err) => { 
+    writeFile(join(root, '.env'), 'TOKEN=' + token + '\nPREFIX=' + prefix, { recursive: true }, err => { 
         if (err) throw err;
     });
 
-    fs.writeFile(root + files['index.js'].path + 'index.js', files['index.js'].code[botLibrary], (err) => {
+    writeFile(join(root, '.gitignore'), 'node_modules/\n.env', { recursive: true }, err => {
         if (err) throw err;
-        else child_process.exec('cd ' + root + ' && npm init -y && npm install dotenv ' + botLibrary, function (err, out) {
-            if (err) throw 'Error when trying to instal dependencies: ' + err.message;
- 
-            console.log(chalk.yellow('Dependencies installed...'));
+    });
+
+    writeFile(join(root, 'index.js'), source[library], { recursive: true }, err => {
+        if (err) throw err;
+        else exec('cd ' + root + ' && npm init -y && npm install dotenv ' + library, err => {
+            if (err) throw err;
         });
     });
-
-    console.log(chalk.green('The bot ' + botName + ' was created.'));
-}
-
-Bot();
+});
