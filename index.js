@@ -32,10 +32,10 @@ prompt([
             'eris'
         ]
     }
-]).then(({ name, prefix, token, library }) => {
+]).then(async ({ name, prefix, token, library }) => {
     const root = name.toLowerCase();
 
-    mkdir(root, { recursive: true }, err => {
+    await mkdir(root, { recursive: true }, err => {
         if (err) throw err;
     });
 
